@@ -9,7 +9,7 @@ class MavenUploaderTest extends GroovyTestCase {
 
     project.pluginManager.apply(MavenUploader.class)
 
-    def uploadToGgRepo = project.tasks.uploadToGgRepo
-    println "uploadToGgRepo = ${uploadToGgRepo}"
+    def uploadToMaven = project.tasks.uploadToMaven
+    println "uploadToMaven = $uploadToMaven"
   }
 }

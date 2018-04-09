@@ -10,34 +10,11 @@ class GgRepoUploader implements Plugin<Project> {
   void apply(Project project) {
 
     if (Env.ggRepoUrl() == null) {
-      MessageUtil.printNoRepoError()
+      LocalUtil.printNoRepoError()
       return
     }
 
-    project.pluginManager.apply("java")
-    project.pluginManager.apply("maven")
-
-    def sourcesJar = project.tasks.findByName("sourcesJar")
-    if (sourcesJar == null) {
-      sourcesJar = project.tasks.create("sourcesJar", Jar.class) {
-        group = "documentation"
-        from project.sourceSets.main.allSource
-        classifier = 'sources'
-      }
-    }
-
-    def javadocJar = project.tasks.findByName("javadocJar")
-    if (javadocJar == null) {
-      javadocJar = project.tasks.create("javadocJar", Jar.class) {
-        group = "documentation"
-        from project.tasks.javadoc
-        classifier = 'javadoc'
-      }
-    }
-
-    project.artifacts {
-      archives javadocJar, sourcesJar
-    }
+    LocalUtil.registerSourcesJavadocJarTasks(project)
 
     project.tasks.create("uploadToGgRepo", Upload) {
       group 'upload'
