@@ -26,3 +26,26 @@ dependencies {
 
   testCompile group: 'junit', name: 'junit', version: '4.12'
 }
+
+
+idea.module {
+  inheritOutputDirs = false
+  outputDir = compileGroovy.destinationDir
+  testOutputDir = compileTestGroovy.destinationDir
+}
+
+task createClasspathManifest {
+  def outputDir = file("$buildDir/$name")
+
+  inputs.files sourceSets.main.runtimeClasspath
+  outputs.dir outputDir
+
+  doLast {
+    outputDir.mkdirs()
+    file("$outputDir/plugin-classpath.txt").text = sourceSets.main.runtimeClasspath.join("\n")
+  }
+}
+
+dependencies {
+  testRuntime files(createClasspathManifest)
+}

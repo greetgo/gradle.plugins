@@ -4,7 +4,7 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.plugins.signing.Sign
 
-class SignAll implements Plugin<Project> {
+class SignGreetgoPlugin implements Plugin<Project> {
   @Override
   void apply(Project project) {
     if (false

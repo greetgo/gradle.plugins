@@ -5,7 +5,7 @@ import org.gradle.api.Project
 import org.gradle.api.tasks.Upload
 import org.gradle.api.tasks.bundling.Jar
 
-class GgRepoUploader implements Plugin<Project> {
+class GgRepoUploadPlugin implements Plugin<Project> {
 
   void apply(Project project) {
 

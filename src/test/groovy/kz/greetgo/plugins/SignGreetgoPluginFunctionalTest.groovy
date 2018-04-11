@@ -7,7 +7,7 @@ import spock.lang.Specification
 import spock.lang.Unroll
 import static org.gradle.testkit.runner.TaskOutcome.*
 
-class SignAllFunctionalTest extends Specification {
+class SignGreetgoPluginFunctionalTest extends Specification {
   @Rule final TemporaryFolder testProjectDir = new TemporaryFolder()
   File buildFile
 

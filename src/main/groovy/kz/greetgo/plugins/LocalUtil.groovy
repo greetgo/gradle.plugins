@@ -5,6 +5,8 @@ import org.gradle.api.tasks.bundling.Jar
 
 import java.util.stream.Collectors
 
+import static kz.greetgo.plugins.MavenUploadPlugin.UPLOAD_TASK_NAME
+
 class LocalUtil {
   static void printNoRepoError() {
     def list = new ArrayList<String>()
@@ -92,6 +94,60 @@ class LocalUtil {
     list += "  ${Env.LIB_SONATYPE_ACCOUNT_HASH_PASSWORD} - Your Sonatype account password"
     list += ""
     list += "You can define its in file ~/.pam_environment"
+
+    printListToStderr(list)
+  }
+
+  static def printExtUploadToMavenCentral() {
+    def list = new ArrayList<String>()
+
+    list += "You need to define block '$UPLOAD_TASK_NAME' in build.gradle"
+    list += ""
+    list += "For example (short variant):"
+    list += ""
+    list += "  $UPLOAD_TASK_NAME {"
+    list += "    description = 'Description of this module: it will appear in MavenCentral'"
+    list += "    url         = 'https://github.com/greetgo/test_project'"
+    list += "  }"
+    list += ""
+    list += "For example (middle variant):"
+    list += ""
+    list += "  $UPLOAD_TASK_NAME {"
+    list += "    description = 'Description of this module: it will appear in MavenCentral'"
+    list += "    url         = 'https://tech.greetgo.kz/test_project.php'"
+    list += "    scm {"
+    list += "      url = 'https://github.com/greetgo/test_project'"
+    list += "    }"
+    list += "    developer {"
+    list += "      id    = 'devId'"
+    list += "      name  = 'devName'"
+    list += "      email = 'devEmail@host.kz'"
+    list += "    }"
+    list += "  }"
+    list += ""
+    list += "For example (full variant):"
+    list += ""
+    list += "  $UPLOAD_TASK_NAME {"
+    list += "    description = 'Description of this module: it will appear in MavenCentral'"
+    list += "    url         = 'https://tech.greetgo.kz/test_project.php'"
+    list += "    scm {"
+    list += "      url           = 'https://github.com/greetgo/test_project'"
+    list += "      connection    = 'scm:git:https://github.com/greetgo/test_project'"
+    list += "      devConnection = 'scm:git:https://github.com/greetgo/test_project'"
+    list += "    }"
+    list += "    developer {"
+    list += "      id    = 'devId'"
+    list += "      name  = 'devName'"
+    list += "      email = 'devEmail@host.kz'"
+    list += "    }"
+    list += "    developer {"
+    list += "      id    = 'dev2Id'"
+    list += "      name  = 'dev2Name'"
+    list += "      email = 'dev2Email@host.kz'"
+    list += "    }"
+    list += "    //or more developers"
+    list += "  }"
+    list += ""
 
     printListToStderr(list)
   }

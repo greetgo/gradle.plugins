@@ -3,7 +3,7 @@ package kz.greetgo.plugins
 import org.gradle.api.Project
 import org.gradle.testfixtures.ProjectBuilder
 
-class SignAllTest extends GroovyTestCase {
+class SignGreetgoPluginTest extends GroovyTestCase {
   void testName() {
     Project project = ProjectBuilder.builder().build()
 
@@ -13,7 +13,7 @@ class SignAllTest extends GroovyTestCase {
       }
     }
 
-    project.pluginManager.apply(SignAll.class)
+    project.pluginManager.apply(SignGreetgoPlugin.class)
 
 //    def uploadToMaven = project.tasks.uploadToMaven
 //    println "uploadToMaven = $uploadToMaven"
