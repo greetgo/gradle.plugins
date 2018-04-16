@@ -6,7 +6,7 @@ apply plugin: 'idea'
 apply plugin: 'maven'
 apply plugin: 'groovy'
 
-version = '0.0.4'
+version = '0.0.5'
 
 group = 'kz.greetgo.plugins'
 
@@ -26,7 +26,6 @@ dependencies {
 
   testCompile group: 'junit', name: 'junit', version: '4.12'
 }
-
 
 idea.module {
   inheritOutputDirs = false

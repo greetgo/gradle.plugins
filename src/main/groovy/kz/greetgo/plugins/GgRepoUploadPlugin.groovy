@@ -32,6 +32,7 @@ class GgRepoUploadPlugin implements Plugin<Project> {
           name project.name
           packaging 'jar'
         }
+
       }
     }
 
