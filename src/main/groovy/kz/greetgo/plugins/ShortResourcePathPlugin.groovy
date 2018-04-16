@@ -6,6 +6,8 @@ import org.gradle.api.Project
 class ShortResourcePathPlugin implements Plugin<Project> {
   @Override
   void apply(Project project) {
+    project.pluginManager.apply('java')
+
     project.compileJava.options.encoding = 'UTF-8'
     project.compileTestJava.options.encoding = 'UTF-8'
 

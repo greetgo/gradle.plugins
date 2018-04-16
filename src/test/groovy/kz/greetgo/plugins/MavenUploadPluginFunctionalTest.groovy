@@ -7,6 +7,7 @@ import org.junit.rules.TemporaryFolder
 import spock.lang.Specification
 import spock.lang.Unroll
 
+import static kz.greetgo.plugins.UsingGradleVersions.getUsingGradleVersions
 import static org.gradle.testkit.runner.TaskOutcome.SUCCESS
 import static org.hamcrest.core.Is.is
 import static org.hamcrest.core.IsNot.not
@@ -93,7 +94,7 @@ class MavenUploadPluginFunctionalTest extends Specification {
     result.task(":testTask").outcome == SUCCESS
 
     where:
-    gradleVersion << ['4.5']
+    gradleVersion << usingGradleVersions
   }
 
 
@@ -142,6 +143,6 @@ class MavenUploadPluginFunctionalTest extends Specification {
     error.message.contains("description = 'Description of this module: it will appear in MavenCentral'")
 
     where:
-    gradleVersion << ['4.5']
+    gradleVersion << usingGradleVersions
   }
 }

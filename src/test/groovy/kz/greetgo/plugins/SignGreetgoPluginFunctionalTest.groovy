@@ -5,6 +5,8 @@ import org.junit.Rule
 import org.junit.rules.TemporaryFolder
 import spock.lang.Specification
 import spock.lang.Unroll
+
+import static kz.greetgo.plugins.UsingGradleVersions.getUsingGradleVersions
 import static org.gradle.testkit.runner.TaskOutcome.*
 
 class SignGreetgoPluginFunctionalTest extends Specification {
@@ -38,6 +40,6 @@ class SignGreetgoPluginFunctionalTest extends Specification {
     result.task(":helloWorld").outcome == SUCCESS
 
     where:
-    gradleVersion << ['4.5']
+    gradleVersion << usingGradleVersions
   }
 }

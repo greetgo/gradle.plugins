@@ -7,20 +7,21 @@ class ShortJavaPathPlugin implements Plugin<Project> {
   @Override
   void apply(Project project) {
 
-    project.pluginManager.apply(ShortResourcePathPlugin)
     project.pluginManager.apply('java')
+    project.pluginManager.apply('maven')
+    project.pluginManager.apply(ShortResourcePathPlugin)
 
     project.sourceSets.main.java.srcDirs = ["src"]
     project.sourceSets.test.java.srcDirs = ["test_src"]
 
     project.processResources {
-      with copySpec {
+      with project.copySpec {
         from "src"
         exclude "**/*.java"
       }
     }
     project.processTestResources {
-      with copySpec {
+      with project.copySpec {
         from "test_src"
         exclude "**/*.java"
       }
