@@ -5,8 +5,11 @@ plugins {
 apply plugin: 'idea'
 apply plugin: 'maven'
 apply plugin: 'groovy'
+apply plugin: 'signing'
 
-version = '0.0.5'
+configurations { repoUpload }
+
+version = '0.0.1'
 
 group = 'kz.greetgo.plugins'
 
@@ -26,6 +29,9 @@ dependencies {
 
   testCompile group: 'junit', name: 'junit', version: '4.12'
   testCompile 'org.easytesting:fest-assert-core:2.0M10'
+
+  // needed for DAV protocol on maven uploads
+  repoUpload "org.apache.maven.wagon:wagon-webdav-jackrabbit:1.0-beta-6"
 }
 
 idea.module {
@@ -48,4 +54,97 @@ task createClasspathManifest {
 
 dependencies {
   testRuntime files(createClasspathManifest)
+}
+
+//UPLOAD TO MAVEN CENTRAL
+
+task sourcesJar(type: Jar) {
+  from sourceSets.main.allSource
+  classifier = 'sources'
+}
+
+tasks.withType(Javadoc) {
+  options.addStringOption('Xdoclint:none', '-quiet')
+  options.addStringOption('encoding', 'UTF-8')
+  options.addStringOption('charSet', 'UTF-8')
+}
+
+task javadocJar(type: Jar) {
+  classifier = 'javadoc'
+  from javadoc
+}
+
+artifacts {
+  archives javadocJar, sourcesJar
+}
+
+
+if (System.getenv('LIB_SIGN_GPG_KEY_ID') != null && System.getenv('LIB_SIGN_GPG_KEY_ID').length() > 0) {
+
+  gradle.taskGraph.whenReady { taskGraph ->
+    if (taskGraph.allTasks.any { it instanceof Sign }) {
+      allprojects { ext."signing.keyId" = System.getenv('LIB_SIGN_GPG_KEY_ID') }
+      allprojects { ext."signing.secretKeyRingFile" = System.getenv('LIB_SIGN_GPG_KEY_LOCATION') }
+      allprojects { ext."signing.password" = System.getenv('LIB_SIGN_GPG_KEY_PASSWORD') }
+    }
+  }
+
+}
+
+signing {
+  sign configurations.archives
+}
+
+project.tasks.create('uploadToMavenCentral', Upload.class) {
+  group = "upload"
+  configuration = configurations.archives
+  repositories {
+    mavenDeployer {
+      beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+      repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+        authentication(
+          userName: System.getenv('LIB_SONATYPE_ACCOUNT_HASH_ID'),
+          password: System.getenv('LIB_SONATYPE_ACCOUNT_HASH_PASSWORD')
+        )
+      }
+
+      snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+        authentication(
+          userName: System.getenv('LIB_SONATYPE_ACCOUNT_HASH_ID'),
+          password: System.getenv('LIB_SONATYPE_ACCOUNT_HASH_PASSWORD')
+        )
+      }
+
+      pom.project {
+        name project.name
+        packaging 'jar'
+
+        description 'Gradle plugins for greetgo! (Uploading to maven central, short sources paths, etc)'
+        url 'http://tech.greetgo.kz/libs/greetgo/gradle.plugins.php'
+
+        scm {
+          connection 'scm:git:https://github.com/greetgo/gradle.plugins'
+          developerConnection 'scm:git:https://github.com/greetgo/gradle.plugins'
+          url 'https://github.com/greetgo/gradle.plugins'
+        }
+
+        licenses {
+          license {
+            name 'The Apache License, Version 2.0'
+            url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+          }
+        }
+
+        developers {
+          developer {
+            id 'pompei'
+            name 'Evgeniy Kolpakov'
+            email 'ekolpakov@greet-go.com'
+          }
+
+        }
+      }
+    }
+  }
 }
