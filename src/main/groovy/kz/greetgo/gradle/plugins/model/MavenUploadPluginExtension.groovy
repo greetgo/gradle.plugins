@@ -1,4 +1,4 @@
-package kz.greetgo.plugins.model
+package kz.greetgo.gradle.plugins.model
 
 import org.gradle.util.ConfigureUtil
 

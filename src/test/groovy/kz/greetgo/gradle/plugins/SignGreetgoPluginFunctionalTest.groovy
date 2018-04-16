@@ -1,4 +1,4 @@
-package kz.greetgo.plugins
+package kz.greetgo.gradle.plugins
 
 import org.gradle.testkit.runner.GradleRunner
 import org.junit.Rule
@@ -6,7 +6,7 @@ import org.junit.rules.TemporaryFolder
 import spock.lang.Specification
 import spock.lang.Unroll
 
-import static kz.greetgo.plugins.UsingGradleVersions.getUsingGradleVersions
+import static kz.greetgo.gradle.plugins.UsingGradleVersions.getUsingGradleVersions
 import static org.gradle.testkit.runner.TaskOutcome.*
 
 class SignGreetgoPluginFunctionalTest extends Specification {

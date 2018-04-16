@@ -1,4 +1,4 @@
-package kz.greetgo.plugins
+package kz.greetgo.gradle.plugins
 
 class Env {
   static String getEnv(String name) {

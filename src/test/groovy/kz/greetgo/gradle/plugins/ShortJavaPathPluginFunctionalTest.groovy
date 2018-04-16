@@ -1,4 +1,4 @@
-package kz.greetgo.plugins
+package kz.greetgo.gradle.plugins
 
 import org.gradle.testkit.runner.GradleRunner
 import org.junit.Rule
@@ -6,7 +6,7 @@ import org.junit.rules.TemporaryFolder
 import spock.lang.Specification
 import spock.lang.Unroll
 
-import static kz.greetgo.plugins.UsingGradleVersions.usingGradleVersions
+import static kz.greetgo.gradle.plugins.UsingGradleVersions.usingGradleVersions
 import static org.fest.assertions.api.Assertions.assertThat
 import static org.gradle.testkit.runner.TaskOutcome.SUCCESS
 
@@ -60,7 +60,7 @@ class ShortJavaPathPluginFunctionalTest extends Specification {
         }
       }
       
-      import kz.greetgo.plugins.ShortJavaPathPlugin
+      import kz.greetgo.gradle.plugins.ShortJavaPathPlugin
       
       apply plugin: ShortJavaPathPlugin
     """

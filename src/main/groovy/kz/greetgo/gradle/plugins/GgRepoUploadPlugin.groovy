@@ -1,9 +1,8 @@
-package kz.greetgo.plugins
+package kz.greetgo.gradle.plugins
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.tasks.Upload
-import org.gradle.api.tasks.bundling.Jar
 
 class GgRepoUploadPlugin implements Plugin<Project> {
 

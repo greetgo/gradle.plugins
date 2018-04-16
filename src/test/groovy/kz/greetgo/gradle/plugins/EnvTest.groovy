@@ -1,4 +1,4 @@
-package kz.greetgo.plugins
+package kz.greetgo.gradle.plugins
 
 class EnvTest extends GroovyTestCase {
   void test_ggRepo() {

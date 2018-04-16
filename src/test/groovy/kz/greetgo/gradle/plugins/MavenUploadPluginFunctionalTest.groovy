@@ -1,4 +1,4 @@
-package kz.greetgo.plugins
+package kz.greetgo.gradle.plugins
 
 import org.gradle.testkit.runner.BuildResult
 import org.gradle.testkit.runner.GradleRunner
@@ -7,7 +7,7 @@ import org.junit.rules.TemporaryFolder
 import spock.lang.Specification
 import spock.lang.Unroll
 
-import static kz.greetgo.plugins.UsingGradleVersions.getUsingGradleVersions
+import static kz.greetgo.gradle.plugins.UsingGradleVersions.getUsingGradleVersions
 import static org.gradle.testkit.runner.TaskOutcome.SUCCESS
 import static org.hamcrest.core.Is.is
 import static org.hamcrest.core.IsNot.not
@@ -47,7 +47,7 @@ class MavenUploadPluginFunctionalTest extends Specification {
         }
       }
 
-      import kz.greetgo.plugins.MavenUploadPlugin
+      import kz.greetgo.gradle.plugins.MavenUploadPlugin
 
       apply plugin: MavenUploadPlugin
 
@@ -113,7 +113,7 @@ class MavenUploadPluginFunctionalTest extends Specification {
         }
       }
 
-      import kz.greetgo.plugins.MavenUploadPlugin
+      import kz.greetgo.gradle.plugins.MavenUploadPlugin
 
       apply plugin: MavenUploadPlugin
 

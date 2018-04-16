@@ -1,6 +1,6 @@
-package kz.greetgo.plugins
+package kz.greetgo.gradle.plugins
 
-import kz.greetgo.plugins.model.MavenUploadPluginExtension
+import kz.greetgo.gradle.plugins.model.MavenUploadPluginExtension
 import org.gradle.api.DefaultTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project

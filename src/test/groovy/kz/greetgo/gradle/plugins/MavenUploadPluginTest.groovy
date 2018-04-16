@@ -1,4 +1,4 @@
-package kz.greetgo.plugins
+package kz.greetgo.gradle.plugins
 
 import org.gradle.api.Project
 import org.gradle.testfixtures.ProjectBuilder

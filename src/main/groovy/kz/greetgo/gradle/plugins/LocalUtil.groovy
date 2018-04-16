@@ -1,11 +1,11 @@
-package kz.greetgo.plugins
+package kz.greetgo.gradle.plugins
 
 import org.gradle.api.Project
 import org.gradle.api.tasks.bundling.Jar
 
 import java.util.stream.Collectors
 
-import static kz.greetgo.plugins.MavenUploadPlugin.UPLOAD_TASK_NAME
+import static kz.greetgo.gradle.plugins.MavenUploadPlugin.UPLOAD_TASK_NAME
 
 class LocalUtil {
   static void printNoRepoError() {
