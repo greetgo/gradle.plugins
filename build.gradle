@@ -89,10 +89,9 @@ if (System.getenv('LIB_SIGN_GPG_KEY_ID') != null && System.getenv('LIB_SIGN_GPG_
     }
   }
 
-}
-
-signing {
-  sign configurations.archives
+  signing {
+    sign configurations.archives
+  }
 }
 
 project.tasks.create('uploadToMavenCentral', Upload.class) {
