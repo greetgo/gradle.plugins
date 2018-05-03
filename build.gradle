@@ -9,7 +9,7 @@ apply plugin: 'signing'
 
 configurations { repoUpload }
 
-version = '0.0.3'
+version = '0.0.4'
 
 group = 'kz.greetgo.plugins'
 
