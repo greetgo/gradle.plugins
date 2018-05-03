@@ -25,6 +25,8 @@ class MavenUploadPlugin implements Plugin<Project> {
   @Override
   void apply(Project project) {
 
+    MavenUploadPluginExtension ext = project.extensions.create(UPLOAD_TASK_NAME, MavenUploadPluginExtension)
+
     if (false
       || Env.sonatypeAccountId() == null
       || Env.sonatypeAccountPassword() == null
@@ -32,8 +34,6 @@ class MavenUploadPlugin implements Plugin<Project> {
       LocalUtil.printNoSonatypeCredentials()
       return
     }
-
-    MavenUploadPluginExtension ext = project.extensions.create(UPLOAD_TASK_NAME, MavenUploadPluginExtension)
 
     LocalUtil.registerSourcesJavadocJarTasks(project)
 
