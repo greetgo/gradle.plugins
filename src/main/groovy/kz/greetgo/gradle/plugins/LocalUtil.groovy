@@ -9,21 +9,19 @@ import static kz.greetgo.gradle.plugins.MavenUploadPlugin.UPLOAD_TASK_NAME
 
 class LocalUtil {
   static void printNoRepoError() {
+
     def list = new ArrayList<String>()
 
-    list += "You do not define environment variable ${Env.GG_REPO_URL}"
-    list += "You can define it in file ~/.pam_environment"
-    list += "Also, you can define environment variables ${Env.GG_REPO_USERNAME}, ${Env.GG_REPO_PASSWORD} to authenticate repository access."
+    list += "You ask to upload to greetgo!'s repository."
+    list += "Any of needed environment variables do not define"
     list += ""
-//    list += "Another way: write in build.gradle:"
-//    list += ""
-//    list += "     ggRepoUpload {"
-//    //noinspection SpellCheckingInspection
-//    list += "       url = 'http://HOST:8080/repository/internal/' // for archiva"
-//    list += "       username = 'pushkin' // Не знаешь что говорить, говори: \"Пушкин\". (С) Что? Где? Когда?"
-//    list += "       password = 'secret'"
-//    list += "     }"
-//    list += ""
+    list += "You need define the following environment variables:"
+    list += ""
+    list += "  ${Env.GG_REPO_URL} - URL of greetgo!'s repository. Example: http://ARCHIVA_HOST/repository/internal/"
+    list += "  ${Env.GG_REPO_USERNAME} - Account username of repository. May be empty for public access repository"
+    list += "  ${Env.GG_REPO_PASSWORD} - Account password of repository"
+    list += ""
+    list += "You can define its in file ~/.pam_environment"
 
     printListToStderr(list)
   }
