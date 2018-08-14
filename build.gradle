@@ -8,8 +8,6 @@ apply plugin: 'maven'
 apply plugin: 'groovy'
 apply plugin: 'signing'
 
-configurations { repoUpload }
-
 version = '0.0.5'
 
 group = 'kz.greetgo.plugins'
@@ -30,9 +28,6 @@ dependencies {
 
   testCompile group: 'junit', name: 'junit', version: '4.12'
   testCompile 'org.easytesting:fest-assert-core:2.0M10'
-
-  // needed for DAV protocol on maven uploads
-  repoUpload "org.apache.maven.wagon:wagon-webdav-jackrabbit:1.0-beta-6"
 }
 
 idea.module {
@@ -83,12 +78,17 @@ pluginBundle {
   plugins {
     shortPathsPlugin {
       displayName = 'kz.greetgo.short-paths plugin makes you source paths shorter'
+      description = 'This plugin makes your source path shorter: src - java sources, src_resooures - resources,' +
+        ' test_src - java sources for tests, test_resources - resources for tests. Also source directories' +
+        ' are resources source. All directories places in root of project'
     }
     uploadToGgRepoPlugin {
       displayName = 'kz.greetgo.upload-to-gg-repo plugin uploads library to GG_REPO'
+      description = 'This plugin uploads library to GG_REPO'
     }
     uploadToMavenPlugin {
       displayName = 'kz.greetgo.upload-to-maven plugin uploads library to Maven Central Repository'
+      description = 'This plugin uploads library to Central Maven Repository'
     }
   }
 }
