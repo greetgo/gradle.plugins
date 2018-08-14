@@ -180,8 +180,11 @@ Also plugin needs environments variables:
 ```
 LIB_SIGN_GPG_KEY_ID=111
 LIB_SIGN_GPG_KEY_PASSWORD=111
-LIB_SIGN_GPG_KEY_LOCATION=/path/to/secring.gpg
+LIB_SIGN_GPG_KEY_LOCATION=/the/full/path/to/secring.gpg
 
 LIB_SONATYPE_ACCOUNT_HASH_ID=account of https://oss.sonatype.org
 LIB_SONATYPE_ACCOUNT_HASH_PASSWORD=secret password
 ```
+
+Looks https://docs.gradle.org/current/userguide/signing_plugin.html about variables LIB_SIGN_GPG_KEY*
+
