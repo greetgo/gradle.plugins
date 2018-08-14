@@ -14,7 +14,7 @@ buildscript {
   }
 
   dependencies {
-    classpath "kz.greetgo.plugins:greetgo.gradle.plugins:0.0.4"
+    classpath "kz.greetgo.plugins:greetgo.gradle.plugins:0.0.5"
   }
 }
 
@@ -42,7 +42,7 @@ buildscript {
   }
 
   dependencies {
-    classpath "kz.greetgo.plugins:greetgo.gradle.plugins:0.0.4"
+    classpath "kz.greetgo.plugins:greetgo.gradle.plugins:0.0.5"
   }
 }
 
@@ -63,7 +63,7 @@ buildscript {
   }
 
   dependencies {
-    classpath "kz.greetgo.plugins:greetgo.gradle.plugins:0.0.4"
+    classpath "kz.greetgo.plugins:greetgo.gradle.plugins:0.0.5"
   }
 }
 
