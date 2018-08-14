@@ -2,9 +2,18 @@
 
 Plugins using in greetgo!
 
-### Плагин "укорочения" src-директорий
+### Plugin to "shorting" source paths
 
-Подключается с помощью кода:
+Includes with:
+
+```groovy
+plugins {
+  id "kz.greetgo.short-paths" version "0.0.5"
+}
+```
+
+Or
+
 ```groovy
 buildscript {
   repositories {
@@ -21,18 +30,39 @@ buildscript {
 apply plugin: kz.greetgo.gradle.plugins.ShortJavaPathPlugin
 ```
 
-Делает следующие пути исходников:
+(look: https://plugins.gradle.org/plugin/kz.greetgo.short-paths)
 
-* `src` - исходники для Java (продакшн) + ресурсы для продакшна (*.java исключаются)
-* `src_resources` - ресурсы для продакшна
-* `test_src` - исходники для Java (тесты) + ресурсы для тестов (*.java исключаются)
-* `test_resources` - ресурсы для тестов
+Makes following paths:
 
-Обратите внимание, что в `src` и `test_src` можно ложить ресурсы.
+* `PROJECT_ROOT/src/` - Java sources (production) + resources for production (*.java excludes)
+* `PROJECT_ROOT/src_resources/` - resources for production
+* `PROJECT_ROOT/test_src/` - Java sources (tests) + resources for tests (*.java excludes)
+* `PROJECT_ROOT/test_resources/` - resources for tests
 
-### Плагин выгрузки в локальный репозиторий greetgo! (GG_REPO)
+Note that you can store resources in `src` and `test_src`.
 
-Подключается с помощью кода:
+Note standard maven paths moves:
+
+* `PROJECT_ROOT/src/main/java/` ⟶ `PROJECT_ROOT/src/`
+* `PROJECT_ROOT/src/main/resources/` ⟶ `PROJECT_ROOT/src_resources/`
+* `PROJECT_ROOT/src/test/java/` ⟶ `PROJECT_ROOT/test_src/`
+* `PROJECT_ROOT/src/test/resources/` ⟶ `PROJECT_ROOT/test_resources/`
+
+And paths `PROJECT_ROOT/src/main/java/`, `PROJECT_ROOT/src/test/java/` cannot contain resources, but
+new paths: `PROJECT_ROOT/src/`, `PROJECT_ROOT/test_src/` - can.
+
+### Plugin uploads artifacts to greetgo! repository (GG_REPO)
+
+Includes with:
+
+```groovy
+plugins {
+  id "kz.greetgo.upload-to-gg-repo" version "0.0.5"
+}
+```
+
+or
+
 ```groovy
 buildscript {
   repositories {
@@ -49,11 +79,35 @@ buildscript {
 apply plugin: kz.greetgo.gradle.plugins.GgRepoUploadPlugin
 ```
 
-Добавляет в проект таску `uploadToGgRepo`, которая выгружает в локальный репозиторий greetgo!
+(look: https://plugins.gradle.org/plugin/kz.greetgo.upload-to-gg-repo)
 
-### Плагин выгрузки в центральный репозиторий Maven
+Adds task `uploadToGgRepo`, to upload artifacts to local greetgo! repository (GG_REPO)
 
-Подключается с помощью кода:
+Plugin needs environment variable:
+```
+GG_REPO=URL of repo
+```
+
+or
+
+```
+GG_REPO_URL=URL of repo
+GG_REPO_USERNAME=username for repo
+GG_REPO_PASSWORD=secret
+```
+
+### Plugin uploads to Maven Central Repository
+
+Includes with:
+
+```groovy
+plugins {
+  id "kz.greetgo.upload-to-maven" version "0.0.5"
+}
+```
+
+or
+
 ```groovy
 buildscript {
   repositories {
@@ -70,18 +124,20 @@ buildscript {
 apply plugin: kz.greetgo.gradle.plugins.MavenUploadPlugin
 ```
 
-Добавляет в проект таску `uploadToMavenCentral`, которая выгружает в центральный репозиторий Maven.
+(look: https://plugins.gradle.org/plugin/kz.greetgo.upload-to-maven)
 
-Для работы плагина требуется заполнить параметры:
+Adds task `uploadToMavenCentral`, to upload artifacts to Maven Central Repository
 
-* Короткий вариант:
+Plugin need parameters:
+
+* Short variant:
 ```groovy
   uploadToMavenCentral {
     description = 'Description of this module: it will appear in MavenCentral'
     url         = 'https://github.com/greetgo/test_project'
   }
 ```
-* Средний вариант:
+* Middle variant:
 ```groovy
   uploadToMavenCentral {
     description = 'Description of this module: it will appear in MavenCentral'
@@ -96,7 +152,7 @@ apply plugin: kz.greetgo.gradle.plugins.MavenUploadPlugin
     }
   }
 ```
-* Полный вариант:
+* Full variant:
 ```groovy
   uploadToMavenCentral {
     description = 'Description of this module: it will appear in MavenCentral'
@@ -118,4 +174,14 @@ apply plugin: kz.greetgo.gradle.plugins.MavenUploadPlugin
     }
     //or more developers
   }
+```
+
+Also plugin needs environments variables:
+```
+LIB_SIGN_GPG_KEY_ID=111
+LIB_SIGN_GPG_KEY_PASSWORD=111
+LIB_SIGN_GPG_KEY_LOCATION=/path/to/secring.gpg
+
+LIB_SONATYPE_ACCOUNT_HASH_ID=account of https://oss.sonatype.org
+LIB_SONATYPE_ACCOUNT_HASH_PASSWORD=secret password
 ```
