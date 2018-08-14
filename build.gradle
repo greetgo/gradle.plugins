@@ -1,5 +1,6 @@
 plugins {
   id 'java-gradle-plugin'
+  id "com.gradle.plugin-publish" version "0.10.0"
 }
 
 apply plugin: 'idea'
@@ -54,6 +55,42 @@ task createClasspathManifest {
 
 dependencies {
   testRuntime files(createClasspathManifest)
+}
+
+gradlePlugin {
+  plugins {
+    shortPathsPlugin {
+      id = 'kz.greetgo.short-paths'
+      implementationClass = 'kz.greetgo.gradle.plugins.ShortJavaPathPlugin'
+    }
+    uploadToGgRepoPlugin {
+      id = 'kz.greetgo.upload-to-gg-repo'
+      implementationClass = 'kz.greetgo.gradle.plugins.GgRepoUploadPlugin'
+    }
+    uploadToMavenPlugin {
+      id = 'kz.greetgo.upload-to-maven'
+      implementationClass = 'kz.greetgo.gradle.plugins.MavenUploadPlugin'
+    }
+  }
+}
+
+pluginBundle {
+  website = 'https://github.com/greetgo/gradle.plugins'
+  vcsUrl = 'https://github.com/greetgo/gradle.plugins.git'
+  description = 'A set of plugins using in greetgo! : (short-paths, upload-to-gg-repo, upload-to-maven)'
+  tags = ['greetgo', 'upload', 'upload-to-maven', 'upload-to-gg-repo']
+
+  plugins {
+    shortPathsPlugin {
+      displayName = 'kz.greetgo.short-paths plugin makes you source paths shorter'
+    }
+    uploadToGgRepoPlugin {
+      displayName = 'kz.greetgo.upload-to-gg-repo plugin uploads library to GG_REPO'
+    }
+    uploadToMavenPlugin {
+      displayName = 'kz.greetgo.upload-to-maven plugin uploads library to Maven Central Repository'
+    }
+  }
 }
 
 //UPLOAD TO MAVEN CENTRAL
